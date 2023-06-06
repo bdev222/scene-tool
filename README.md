@@ -1,46 +1,50 @@
-# Getting Started with Create React App
+## App
+Scene management tool for episodes.
+This is based on [Rick And Morty Graphql API](https://rickandmortyapi.com/graphql)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Author
+Branko Damjanovic
 
-## Available Scripts
+## Tech stacks
+React, Typescript, Apollo Graphql, Redux
 
-In the project directory, you can run:
+## Style system
+MUI v5
 
-### `yarn start`
+## Description
+This app has following functionalities.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+***
+#### Add or Remove scenes to episode
+#### Add or Remove characters from scene
+#### Set the scene's location
+#### Set the scene's description
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+***
+This app consists of three main pages
 
-### `yarn test`
+`Scenes page for each episode` \
+`Add new Scene page` \
+`Edit Scene`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+***
 
-### `yarn build`
+### Scenes page
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`Each scene` is shown as a `card` of the first character image and location name. \
+`Each scene` can be `removed` by clicking `Remove` icon at the corner of the card. (Here it doesn't show any confirmation dialog and will delete immediately. But considering this functionality will be connected to real api endpoint, then we have to show this modal before calling remove api endpoint) \
+To enter `Edit mode` of scene, you can just click the card then it will lead you to the edit page.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+***
+### Edit or Add new Scene page
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+In `Edit/Add` page, you can see `3 panels`.\
+The first one is `Locations` panel.\
+The second one is `Characters` panel.\
+In these two panels, you can choose one `location` and multiple `characters` for the scene.
+The third one is the panel to show the `Draft of scene` made by your operations (choose locations and characters) and set `description` by input field.
 
-### `yarn eject`
+Here you can't `Add/Save` scene if you didn't select `location`.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+After all, you can click `Add/Save` button.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
