@@ -11,6 +11,9 @@ React, Typescript, Apollo Graphql, Redux
 ## Style system
 MUI v5
 
+## How to run this app
+After `git clone`, run `yarn` and `yarn start`
+
 ## Description
 This app has following functionalities.
 
