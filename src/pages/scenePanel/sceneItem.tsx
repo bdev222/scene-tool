@@ -50,6 +50,7 @@ export default function SceneItem({
         </Card>
       </Badge>
       <Box
+        onClick={() => onClick(scene)}
         sx={{ display: { xs: "flex", md: "none" }, alignItems: "center", bgcolor: "primary.main" }}
       >
         <Box

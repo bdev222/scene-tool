@@ -14,6 +14,10 @@ MUI v5
 ## How to run this app
 After `git clone`, run `yarn` and `yarn start`
 
+## Unit testing
+Regarding unit testing, I just added `scene.slice.spec.tsx` in this project. Considering deadline of the task, here I am going to skip unit testing for this app by creating one sample test file.
+To run this file, you can run `yarn test` in bash.
+
 ## Description
 This app has following functionalities.
 
@@ -37,7 +41,7 @@ This app consists of three main pages
 `Each scene` is shown as a `card` of the first character image and location name. \
 `Each scene` can be `removed` by clicking `Remove` icon at the corner of the card. (Here it doesn't show any confirmation dialog and will delete immediately. But considering this functionality will be connected to real api endpoint, then we have to show this modal before calling remove api endpoint) \
 To enter `Edit mode` of scene, you can just click the card then it will lead you to the edit page.\
-To enter `Add mode` of scene, you can click the `+` button in the panel at the end of scene cards.
+To enter `Add mode` of scene, you can click the `+` button in the panel at the right top corner.
 
 ***
 ### Edit or Add new Scene page
@@ -53,3 +57,8 @@ Here you can't `Add/Save` scene if you didn't select `location`.
 
 After all, you can click `Add/Save` button.
 
+### App workflow
+
+![Web](public/web.gif)
+
+![Mobile](public/mobile.gif)
