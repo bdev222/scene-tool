@@ -5,7 +5,7 @@ import { RootState } from "./store"
 
 export type Scene = { id: string; location: Location; characters: Character[]; description: string }
 
-type SceneState = Record<string, Scene[]>
+export type SceneState = Record<string, Scene[]>
 
 const initialState: SceneState = {}
 
