@@ -1,6 +1,6 @@
 import React from "react"
-import { Box, Typography, Card, CardMedia, CardContent, Badge } from "@mui/material"
-import { Remove as RmoveIcon } from "@mui/icons-material"
+import { Box, Typography, Card, CardMedia, CardContent, Badge, Button } from "@mui/material"
+import { Remove as RemoveIcon } from "@mui/icons-material"
 
 import { Scene } from "../../app/scene.slice"
 
@@ -16,7 +16,7 @@ export default function SceneItem({
   return (
     <Box sx={{ p: 1 }}>
       <Badge
-        badgeContent={<RmoveIcon onClick={() => onDelete(scene.id)} />}
+        badgeContent={<RemoveIcon onClick={() => onDelete(scene.id)} />}
         color="secondary"
         sx={{ display: { md: "block", xs: "none" }, "&:hover": { cursor: "pointer" } }}
       >
@@ -50,7 +50,6 @@ export default function SceneItem({
         </Card>
       </Badge>
       <Box
-        onClick={() => onClick(scene)}
         sx={{ display: { xs: "flex", md: "none" }, alignItems: "center", bgcolor: "primary.main" }}
       >
         <Box
@@ -68,7 +67,38 @@ export default function SceneItem({
           }}
         >
           <Typography sx={{ fontSize: "14px" }}>{scene.location.name || ""}</Typography>
-          <Typography sx={{ fontSize: "12px" }}>{scene.description}</Typography>
+          <Typography
+            sx={{
+              fontSize: "12px",
+              width: "150px",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            {scene.description}
+          </Typography>
+          <Box sx={{ display: "flex", gap: 1, mt: 1 }}>
+            <Button
+              variant="outlined"
+              color="info"
+              sx={{ p: "4px 5px", fontSize: "12px" }}
+              onClick={() => onClick(scene)}
+            >
+              Edit
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              sx={{
+                p: "4px 5px",
+                fontSize: "12px",
+              }}
+              onClick={() => onDelete(scene.id)}
+            >
+              Remove
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Box>
