@@ -18,7 +18,7 @@ export default function SceneItem({
       <Badge
         badgeContent={<RmoveIcon onClick={() => onDelete(scene.id)} />}
         color="secondary"
-        sx={{ "&:hover": { cursor: "pointer" } }}
+        sx={{ display: { md: "block", xs: "none" }, "&:hover": { cursor: "pointer" } }}
       >
         <Card
           key={scene.id}
@@ -49,6 +49,27 @@ export default function SceneItem({
           </CardContent>
         </Card>
       </Badge>
+      <Box
+        sx={{ display: { xs: "flex", md: "none" }, alignItems: "center", bgcolor: "primary.main" }}
+      >
+        <Box
+          component="img"
+          src={scene.characters[0]?.image || ""}
+          sx={{ width: 150, height: 150 }}
+        />
+        <Box
+          sx={{
+            dispaly: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            color: "background.default",
+            p: 1,
+          }}
+        >
+          <Typography sx={{ fontSize: "14px" }}>{scene.location.name || ""}</Typography>
+          <Typography sx={{ fontSize: "12px" }}>{scene.description}</Typography>
+        </Box>
+      </Box>
     </Box>
   )
 }

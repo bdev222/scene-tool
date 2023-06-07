@@ -13,17 +13,18 @@ import { useSearchParams, useNavigate } from "react-router-dom"
 
 import { GetEpisodesDocument } from "../../__generated__/graphql"
 
-export default function EpisodePanel() {
+export default function EpisodePanel({ onClose }: { onClose?: () => void }) {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const [page, setPage] = React.useState<number>(1)
   const [searchName, setSearchName] = React.useState<string>()
   const [pages, setPages] = React.useState<number>(0)
-  const { data, loading } = useQuery(GetEpisodesDocument, {
+  const { data, loading, error } = useQuery(GetEpisodesDocument, {
     variables: { page, filter: { name: searchName } },
   })
 
-  const handlePageChange = (_: any, page: number) => {
+  const handlePageChange = (e: any, page: number) => {
+    e.stopPropagation()
     setPage(page)
   }
 
@@ -33,6 +34,9 @@ export default function EpisodePanel() {
   }
 
   const handleClickItem = (episodeId: string) => {
+    if (onClose) {
+      onClose()
+    }
     searchParams.set("episodeId", episodeId)
     navigate(`/scenes?${searchParams.toString()}`)
   }
@@ -51,13 +55,14 @@ export default function EpisodePanel() {
         flexDirection: "column",
         border: "1px solid",
         borderColor: "primary.main",
-        height: "100vh",
+        height: "calc(100vh - 64px)",
         maxWidth: { md: "300px", xs: "100%" },
       }}
     >
       <Box
         sx={{
           display: "flex",
+          flexShrink: 0,
           justifyContent: "space-between",
           alignItems: "center",
           height: "40px",
@@ -78,14 +83,19 @@ export default function EpisodePanel() {
         />
       </Box>
       <Box sx={{ flexGrow: 1, overflowY: "auto", overflowX: "hidden" }}>
-        {loading && (
+        {error ? (
+          <Box p={2}>
+            <Typography sx={{ fontSize: "16px", textAlign: "center" }}>
+              Something was wrong
+            </Typography>
+          </Box>
+        ) : loading ? (
           <Box
             sx={{ display: "flex", justifyContent: "center", height: "100%", alignItems: "center" }}
           >
             <CircularProgress size="1.5rem" />
           </Box>
-        )}
-        {!loading && (
+        ) : (
           <MenuList>
             {data?.episodes?.results?.map((episode) => (
               <MenuItem

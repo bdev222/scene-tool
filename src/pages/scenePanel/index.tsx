@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Breadcrumbs, Link, Typography, Button } from "@mui/material"
+import { Box, Typography, Button } from "@mui/material"
 import { useSearchParams, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 
@@ -31,24 +31,39 @@ export default function ScenePanel() {
         sx={{
           display: "flex",
           alignItems: "center",
+          justifyContent: "space-between",
           height: "40px",
           borderBottom: "1px solid",
           borderColor: "primary.main",
           px: 2,
         }}
       >
-        <Breadcrumbs>
-          <Link underline="hover"> Scenes</Link>
-        </Breadcrumbs>
+        <Typography sx={{ fontSize: "14px", fontWeight: 700 }}> Scenes</Typography>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => navigate(`/scenes/add?episodeId=${searchParams.get("episodeId")}`)}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          + Create New Scene
+        </Button>
       </Box>
-      <Box>
+      <Box
+        sx={{
+          height: "calc(100vh - 106px)",
+          overflowY: "auto",
+        }}
+      >
         {!searchParams.get("episodeId") ? (
           <Box
             sx={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: "calc(100vh - 42px)",
             }}
           >
             <Typography>Please choose episode first to manage scenes</Typography>
@@ -56,8 +71,7 @@ export default function ScenePanel() {
         ) : (
           <Box
             sx={{
-              display: "flex",
-              height: "calc(100vh - 42px)",
+              display: { md: "flex", xs: "block" },
               p: "5px 20px",
               gap: 2,
               flexWrap: "wrap",
@@ -71,22 +85,6 @@ export default function ScenePanel() {
                 onDelete={handleDeleteScene}
               />
             ))}
-            <Button
-              onClick={() => navigate(`/scenes/add?episodeId=${searchParams.get("episodeId")}`)}
-              sx={{
-                width: "40px",
-                height: "60px",
-                m: 2,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: "40px",
-                border: "1px dotted",
-                borderColor: "primary.main",
-              }}
-            >
-              <Typography sx={{ fontSize: "1.5rem" }}>+</Typography>
-            </Button>
           </Box>
         )}
       </Box>

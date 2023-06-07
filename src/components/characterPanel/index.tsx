@@ -14,7 +14,7 @@ export default function CharacterPanel({
   const [page, setPage] = React.useState<number>(1)
   const [searchName, setSearchName] = React.useState<string>()
   const [pages, setPages] = React.useState<number>(0)
-  const { data, loading } = useQuery(GetCharactersDocument, {
+  const { data, loading, error } = useQuery(GetCharactersDocument, {
     variables: { page, filter: { name: searchName } },
   })
 
@@ -45,7 +45,7 @@ export default function CharacterPanel({
         flexDirection: "column",
         border: "1px solid",
         borderColor: "primary.main",
-        height: "calc(100vh - 42px)",
+        height: "calc(100vh - 106px)",
         maxWidth: { md: "300px", xs: "100%" },
       }}
     >
@@ -73,14 +73,19 @@ export default function CharacterPanel({
         />
       </Box>
       <Box sx={{ flexGrow: 1, overflowY: "auto", overflowX: "hidden" }}>
-        {loading && (
+        {error ? (
+          <Box p={2}>
+            <Typography sx={{ fontSize: "16px", textAlign: "center" }}>
+              Something was wrong
+            </Typography>
+          </Box>
+        ) : loading ? (
           <Box
             sx={{ display: "flex", justifyContent: "center", height: "100%", alignItems: "center" }}
           >
             <CircularProgress size="1.5rem" />
           </Box>
-        )}
-        {!loading && (
+        ) : (
           <MenuList>
             {data?.characters?.results?.map((character) => (
               <CharacterItem
